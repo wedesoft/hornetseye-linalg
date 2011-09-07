@@ -52,7 +52,7 @@ VALUE DMatrix::wrapToMultiArray(VALUE rbSelf)
     rb_ivar_set(rbMemory, rb_intern("@size"), INT2NUM(width * height * sizeof(double)));
     VALUE rbTypecode = rb_const_get(mHornetseye, rb_intern("DFLOAT"));
     rbRetVal = rb_funcall(rb_const_get(mHornetseye, rb_intern("MultiArray")),
-      rb_intern("import"), 4, rbTypecode, rbMemory, INT2NUM(width), INT2NUM(height));
+      rb_intern("import"), 4, rbTypecode, rbMemory, INT2NUM(height), INT2NUM(width));
   } catch( std::exception &e ) {
     rb_raise( rb_eRuntimeError, "%s", e.what() );
   };

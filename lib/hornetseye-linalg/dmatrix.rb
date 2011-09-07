@@ -21,7 +21,7 @@ module Linalg
 
     def to_multiarray
       source = self
-      retval = orig_to_multiarray
+      retval = orig_to_multiarray.roll
       retval.instance_eval { @source = source }
       retval
     end

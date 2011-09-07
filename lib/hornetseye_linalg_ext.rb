@@ -20,4 +20,5 @@ require 'linalg'
 
 require 'hornetseye-linalg/node'
 require 'hornetseye-linalg/dmatrix'
+require 'hornetseye-linalg/smatrix'
 

@@ -29,7 +29,7 @@ VALUE SMatrix::registerRubyClass(VALUE module)
 {
   mModule = module;
   cRubyClass = rb_define_class_under(module, "SMatrix", rb_cObject);
-  // rb_define_method(cRubyClass, "to_smatrix", RUBY_METHOD_FUNC(wrapToSMatrix), 0);
+  rb_define_method(cRubyClass, "to_multiarray", RUBY_METHOD_FUNC(wrapToMultiArray), 0);
   return cRubyClass;
 }
 
@@ -38,3 +38,23 @@ void SMatrix::deleteRubyObject(void *ptr)
   free((SMatrix *)ptr);
 }
 
+VALUE SMatrix::wrapToMultiArray(VALUE rbSelf)
+{
+  VALUE rbRetVal = Qnil;
+  try {
+    VALUE mHornetseye = rb_define_module( "Hornetseye" );
+    SMatrix_ *smatrix;
+    dataGetStruct(rbSelf, cRubyClass, SMatrix_, smatrix);
+    int width = smatrix->hsize;
+    int height = smatrix->vsize;
+    VALUE cMalloc = rb_define_class_under(mHornetseye, "Malloc", rb_cObject);
+    VALUE rbMemory = Data_Wrap_Struct(cMalloc, 0, 0, smatrix->data);
+    rb_ivar_set(rbMemory, rb_intern("@size"), INT2NUM(width * height * sizeof(float)));
+    VALUE rbTypecode = rb_const_get(mHornetseye, rb_intern("SFLOAT"));
+    rbRetVal = rb_funcall(rb_const_get(mHornetseye, rb_intern("MultiArray")),
+      rb_intern("import"), 4, rbTypecode, rbMemory, INT2NUM(height), INT2NUM(width));
+  } catch( std::exception &e ) {
+    rb_raise( rb_eRuntimeError, "%s", e.what() );
+  };
+  return rbRetVal;
+}

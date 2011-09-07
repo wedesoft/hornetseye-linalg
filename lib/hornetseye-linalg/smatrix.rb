@@ -13,24 +13,15 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
-module Hornetseye
+module Linalg
 
-  class Node
+  class SMatrix
 
-    alias_method :orig_to_dmatrix, :to_dmatrix
+    alias_method :orig_to_multiarray, :to_multiarray
 
-    def to_dmatrix
-      source = roll.to_dfloat.memorise
-      retval = source.orig_to_dmatrix
-      retval.instance_eval { @source = source }
-      retval
-    end
-
-    alias_method :orig_to_smatrix, :to_smatrix
-
-    def to_smatrix
-      source = roll.to_sfloat.memorise
-      retval = source.orig_to_smatrix
+    def to_multiarray
+      source = self
+      retval = orig_to_multiarray.roll
       retval.instance_eval { @source = source }
       retval
     end
@@ -38,4 +29,6 @@ module Hornetseye
   end
 
 end
+
+
 

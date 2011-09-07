@@ -29,6 +29,7 @@ public:
   static VALUE mModule;
   static VALUE registerRubyClass(VALUE module);
   static void deleteRubyObject(void *ptr);
+  static VALUE wrapToMultiArray(VALUE rbSelf);
 };
 
 #endif

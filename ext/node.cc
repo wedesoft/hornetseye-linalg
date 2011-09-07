@@ -58,8 +58,8 @@ VALUE Node::wrapToDMatrix(VALUE rbSelf)
     dataGetStruct(rbMalloc, cMalloc, unsigned char, source);
     VALUE rbLinalg = rb_define_module("Linalg");
     DMatrix_ *dmatrix = (DMatrix_ *)ALLOC(DMatrix_);
-    dmatrix->hsize = width;
-    dmatrix->vsize = height;
+    dmatrix->hsize = height;
+    dmatrix->vsize = width;
     dmatrix->data = (double *)source;
     rbRetVal = Data_Wrap_Struct(DMatrix::cRubyClass, 0, DMatrix::deleteRubyObject, dmatrix);
   } catch ( std::exception &e ) {
@@ -91,8 +91,8 @@ VALUE Node::wrapToSMatrix(VALUE rbSelf)
     dataGetStruct(rbMalloc, cMalloc, unsigned char, source);
     VALUE rbLinalg = rb_define_module("Linalg");
     SMatrix_ *smatrix = (SMatrix_ *)ALLOC(SMatrix_);
-    smatrix->hsize = width;
-    smatrix->vsize = height;
+    smatrix->hsize = height;
+    smatrix->vsize = width;
     smatrix->data = (float *)source;
     rbRetVal = Data_Wrap_Struct(SMatrix::cRubyClass, 0, SMatrix::deleteRubyObject, smatrix);
   } catch ( std::exception &e ) {
