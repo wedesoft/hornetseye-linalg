@@ -24,8 +24,6 @@ public:
   static VALUE registerRubyClass(VALUE module);
   static VALUE wrapToDMatrix(VALUE rbSelf);
   static VALUE wrapToSMatrix(VALUE rbSelf);
-  static void deleteDMatrix(void *ptr);
-  static void deleteSMatrix(void *ptr);
 };
 
 #endif

@@ -1,4 +1,4 @@
-# hornetseye-hypercomplex - Linalg integration for Hornetseye
+# hornetseye-linalg - Linalg integration for Hornetseye
 # Copyright (C) 2011 Jan Wedekind
 #
 # This program is free software: you can redistribute it and/or modify
@@ -13,11 +13,21 @@
 #
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
+module Linalg
 
-require 'malloc'
-require 'multiarray'
-require 'linalg'
+  class DMatrix
 
-require 'hornetseye-linalg/node'
-require 'hornetseye-linalg/dmatrix'
+    alias_method :orig_to_multiarray, :to_multiarray
+
+    def to_multiarray
+      source = self
+      retval = orig_to_multiarray
+      retval.instance_eval { @source = source }
+      retval
+    end
+
+  end
+
+end
+
 
