@@ -13,19 +13,23 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
-#ifndef HORNETSEYE_NODE_HH
-#define HORNETSEYE_NODE_HH
+#ifndef HORNETSEYE_SMATRIX_HH
+#define HORNETSEYE_SMATRIX_HH
 #include "rubyinc.hh"
 
-class Node {
+typedef struct {
+  int vsize;
+  int hsize;
+  float *data;
+} SMatrix_;
+
+class SMatrix {
 public:
   static VALUE cRubyClass;
   static VALUE mModule;
   static VALUE registerRubyClass(VALUE module);
-  static VALUE wrapToDMatrix(VALUE rbSelf);
-  static VALUE wrapToSMatrix(VALUE rbSelf);
-  static void deleteDMatrix(void *ptr);
-  static void deleteSMatrix(void *ptr);
+  static void deleteRubyObject(void *ptr);
 };
 
 #endif
+

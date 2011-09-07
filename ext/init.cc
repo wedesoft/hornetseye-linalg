@@ -15,6 +15,8 @@
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
 #include "rubyinc.hh"
 #include "node.hh"
+#include "dmatrix.hh"
+#include "smatrix.hh"
 
 #ifdef WIN32
 #define DLLEXPORT __declspec(dllexport)
@@ -30,10 +32,13 @@ extern "C" {
 
   void Init_hornetseye_linalg(void)
   {
-    rb_eval_string( "require 'multiarray'" );
-    VALUE rbHornetseye = rb_define_module( "Hornetseye" );
-    Node::registerRubyClass( rbHornetseye );
-    rb_require( "hornetseye_linalg_ext.rb" );
+    rb_eval_string("require 'multiarray'");
+    VALUE rbHornetseye = rb_define_module("Hornetseye");
+    Node::registerRubyClass(rbHornetseye);
+    VALUE rbLinalg = rb_define_module("Linalg");
+    DMatrix::registerRubyClass(rbLinalg);
+    SMatrix::registerRubyClass(rbLinalg);
+    rb_require("hornetseye_linalg_ext.rb");
   }
 
 }

@@ -20,8 +20,8 @@ PKG_FILES = [ 'Rakefile', 'README.md', 'COPYING', '.document' ] +
             RB_FILES + CC_FILES + HH_FILES + TS_FILES + TC_FILES
 BIN_FILES = [ 'README.md', 'COPYING', '.document', SO_FILE ] +
             RB_FILES + TS_FILES + TC_FILES
-SUMMARY = %q{Camera input using Video for Linux version 2}
-DESCRIPTION = %q{This Ruby extension provides camera input using Video for Linux version 2.}
+SUMMARY = %q{Linalg integration for Hornetseye}
+DESCRIPTION = %q{This Ruby extension provides conversion from Hornetseye::MultiArray to Linalg::DMatrix and vice versa.}
 AUTHOR = %q{Jan Wedekind}
 EMAIL = %q{jan@wedesoft.de}
 HOMEPAGE = %q{http://wedesoft.github.com/hornetseye-linalg/}

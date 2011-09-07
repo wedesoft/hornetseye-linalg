@@ -13,19 +13,29 @@
 
    You should have received a copy of the GNU General Public License
    along with this program.  If not, see <http://www.gnu.org/licenses/>. */
-#ifndef HORNETSEYE_NODE_HH
-#define HORNETSEYE_NODE_HH
-#include "rubyinc.hh"
+#include <algorithm>
+#include <boost/shared_array.hpp>
+#include "error.hh"
+#include "rubytools.hh"
+#include "dmatrix.hh"
 
-class Node {
-public:
-  static VALUE cRubyClass;
-  static VALUE mModule;
-  static VALUE registerRubyClass(VALUE module);
-  static VALUE wrapToDMatrix(VALUE rbSelf);
-  static VALUE wrapToSMatrix(VALUE rbSelf);
-  static void deleteDMatrix(void *ptr);
-  static void deleteSMatrix(void *ptr);
-};
+using namespace std;
 
-#endif
+VALUE DMatrix::mModule = Qnil;
+
+VALUE DMatrix::cRubyClass = Qnil;
+
+VALUE DMatrix::registerRubyClass(VALUE module)
+{
+  mModule = module;
+  cRubyClass = rb_define_class_under(module, "DMatrix", rb_cObject);
+  // rb_define_method(cRubyClass, "to_dmatrix", RUBY_METHOD_FUNC(wrapToDMatrix), 0);
+  return cRubyClass;
+}
+
+void DMatrix::deleteRubyObject(void *ptr)
+{
+  free((DMatrix *)ptr);
+}
+
+
