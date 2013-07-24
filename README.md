@@ -14,7 +14,7 @@ Installation
 ------------
 To install this Ruby extension, use the following command:
 
-    $ sudo gem install hornetseye-linalg
+    $ sudo gem install hornetseye-linalg libswscale-dev libboost-dev
 
 Alternatively you can build and install the Ruby extension from source as follows:
 
