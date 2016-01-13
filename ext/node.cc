@@ -48,15 +48,15 @@ VALUE Node::wrapToDMatrix(VALUE rbSelf)
                "Array needs to have two dimensions for conversion to "
                "DMatrix (but had " << rank << " dimension(s))");
     int
-      width = NUM2INT(RARRAY_PTR(rbShape)[0]),
-      height = NUM2INT(RARRAY_PTR(rbShape)[1]);
+      width = NUM2INT(rb_ary_entry(rbShape, 0)),
+      height = NUM2INT(rb_ary_entry(rbShape, 1));
     ERRORMACRO(rb_funcall(rbTypecode, rb_intern("=="), 1,
                           rb_const_get(mModule, rb_intern("DFLOAT"))) == Qtrue, Error, ,
 	       "Element-type of array must be DFLOAT");
     VALUE cMalloc = rb_define_class_under(mModule, "Malloc", rb_cObject);
     unsigned char *source;
     dataGetStruct(rbMalloc, cMalloc, unsigned char, source);
-    VALUE rbLinalg = rb_define_module("Linalg");
+    rb_define_module("Linalg");
     DMatrix_ *dmatrix = (DMatrix_ *)ALLOC(DMatrix_);
     dmatrix->hsize = height;
     dmatrix->vsize = width;
@@ -81,15 +81,15 @@ VALUE Node::wrapToSMatrix(VALUE rbSelf)
                "Array needs to have two dimensions for conversion to "
                "SMatrix (but had " << rank << " dimension(s))");
     int
-      width = NUM2INT(RARRAY_PTR(rbShape)[0]),
-      height = NUM2INT(RARRAY_PTR(rbShape)[1]);
+      width = NUM2INT(rb_ary_entry(rbShape, 0)),
+      height = NUM2INT(rb_ary_entry(rbShape, 1));
     ERRORMACRO(rb_funcall(rbTypecode, rb_intern("=="), 1,
                           rb_const_get(mModule, rb_intern("SFLOAT"))) == Qtrue, Error, ,
 	       "Element-type of array must be SFLOAT");
     VALUE cMalloc = rb_define_class_under(mModule, "Malloc", rb_cObject);
     unsigned char *source;
     dataGetStruct(rbMalloc, cMalloc, unsigned char, source);
-    VALUE rbLinalg = rb_define_module("Linalg");
+    rb_define_module("Linalg");
     SMatrix_ *smatrix = (SMatrix_ *)ALLOC(SMatrix_);
     smatrix->hsize = height;
     smatrix->vsize = width;
