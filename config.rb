@@ -1,7 +1,7 @@
 require 'rake'
 
 PKG_NAME = 'hornetseye-linalg'
-PKG_VERSION = '1.0.4'
+PKG_VERSION = '1.0.5'
 CFG = RbConfig::CONFIG
 CXX = ENV[ 'CXX' ] || 'g++'
 RB_FILES = ['config.rb'] + FileList[ 'lib/**/*.rb' ]
