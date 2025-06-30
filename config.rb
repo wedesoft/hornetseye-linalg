@@ -19,4 +19,4 @@ DESCRIPTION = %q{This Ruby extension provides conversion from Hornetseye::MultiA
 LICENSE = 'GPL-3+'
 AUTHOR = %q{Jan Wedekind}
 EMAIL = %q{jan@wedesoft.de}
-HOMEPAGE = %q{http://wedesoft.github.com/hornetseye-linalg/}
+HOMEPAGE = %q{http://wedesoft.github.io/hornetseye-linalg/}
